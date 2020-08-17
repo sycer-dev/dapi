@@ -5,7 +5,11 @@ a cli app to interact with the discord api
 [![Downloads](https://img.shields.io/crates/d/dapi.svg?style=flat)](https://crates.io/crates/dapi) -->
 
 ## installation
-Download the pre-build binary at https://github.com/sycer-dev/dapi/releases/latest
+Download the pre-build binary at https://github.com/sycer-dev/dapi/releases/latest  
+And if you have the rust toolchain already installed,
+```sh
+cargo install --git https://github.com/sycer-dev/dapi --branch main
+```    
 
 ## setup
 ```sh
