@@ -3,7 +3,7 @@ use reqwest::blocking::Client;
 use serde::{Deserialize, Serialize};
 use spectacles_model::{message::Message, User};
 
-const ENDPOINT: &'static str = "https://discord.com/api/v6";
+const ENDPOINT: &'static str = "https://discord.com/api/v9";
 
 pub fn form_url(path: &str) -> String {
     return format!("{}{}", ENDPOINT, &path);
@@ -44,6 +44,57 @@ pub fn post<T: Serialize + for<'de> Deserialize<'de>>(
 ) -> Result<T> {
     let data = Client::new()
         .post(&url)
+        .header("Authorization", format!("Bot {}", token))
+        .header("Content-Type", "application/json")
+        .body(body)
+        .send()
+        .expect("Request failed")
+        .json()
+        .expect("Failed to parse the json");
+    Ok(data)
+}
+
+pub fn patch<T: Serialize + for<'de> Deserialize<'de>>(
+    url: String,
+    body: String,
+    token: String,
+) -> Result<T> {
+    let data = Client::new()
+        .patch(&url)
+        .header("Authorization", format!("Bot {}", token))
+        .header("Content-Type", "application/json")
+        .body(body)
+        .send()
+        .expect("Request failed")
+        .json()
+        .expect("Failed to parse the json");
+    Ok(data)
+}
+
+pub fn delete<T: Serialize + for<'de> Deserialize<'de>>(
+    url: String,
+    body: String,
+    token: String,
+) -> Result<T> {
+    let data = Client::new()
+        .delete(&url)
+        .header("Authorization", format!("Bot {}", token))
+        .header("Content-Type", "application/json")
+        .body(body)
+        .send()
+        .expect("Request failed")
+        .json()
+        .expect("Failed to parse the json");
+    Ok(data)
+}
+
+pub fn put<T: Serialize + for<'de> Deserialize<'de>>(
+    url: String,
+    body: String,
+    token: String,
+) -> Result<T> {
+    let data = Client::new()
+        .put(&url)
         .header("Authorization", format!("Bot {}", token))
         .header("Content-Type", "application/json")
         .body(body)
