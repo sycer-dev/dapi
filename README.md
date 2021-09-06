@@ -21,4 +21,5 @@ dapi config token set discord_token_here
 dapi users @me
 dapi users 492374435274162177
 dapi build message --content "Hello World\!"  | dapi msg post 581635926757998613
+echo '{ "content": "hello" } | dapi req post /channels/581635926757998613/messages
 ```
